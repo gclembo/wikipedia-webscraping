@@ -1,8 +1,9 @@
 import requests, json
 from bs4 import BeautifulSoup
 import pandas as pd
+from pathlib import Path
 
-NUMBER_OF_PAGES = 5
+NUMBER_OF_PAGES = 3
 
 def get_random_page_info():
     url = "https://en.wikipedia.org/wiki/Special:Random"
@@ -54,12 +55,16 @@ def get_random_page_info():
         "published": publish_date, "modified": modified_date
     }
 
-
+# Scrape Sites
 data = []
 for i in range(NUMBER_OF_PAGES):
     entry = get_random_page_info()
     data.append(entry)
 
+# Save data as dataframe
 df = pd.DataFrame(data)
-print(df)
-df.to_csv("data.csv")
+
+file_path = Path(__file__)
+project_folder = file_path.resolve().parent.parent
+data_folder = str(project_folder) + "\\data"
+df.to_csv(data_folder + "\\data.csv", index=False)
