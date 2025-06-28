@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <title>Wikipedia Stats Dashboard</title>
+
+
+</head>
+
+<body>
+    <h1>Wikipedia Page Statistics Dashboard</h1>
+    <p>
+        I scraped a bunch of random wikipedia pages and calculated a few statistics.
+        The results are summarized in the plots below
+    </p>
+    <table>
+        <tr>
+            <td>
+                <div id='plot1'></div>
+            </td>
+            <td>
+                <div id='plot2'></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id='plot3'></div>
+            </td>
+            <td>
+                <div id='plot4'></div>
+            </td>
+        </tr>
+    </table>
+
+
+    <script>
+        const word_count = {{word_count | safe}};
+        const source_count = {{source_count | safe}};
+        const image_count = {{image_count | safe}};
+        const titles = {{titles | safe}};
+        const published = {{published | safe}};
+        const modified = {{modified | safe}};
+
+    </script>
+    <script src="{{ url_for('static', filename='plots.js') }}"></script>
+</body>
+</html>
