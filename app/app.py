@@ -1,7 +1,5 @@
-import json
-
 import pandas as pd
-import sqlite3
+import sqlite3, json
 from pathlib import Path
 from flask import Flask, render_template
 
