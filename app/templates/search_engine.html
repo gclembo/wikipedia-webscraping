@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>Search Engine</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Scraped Page Search Engine</h1>
+        <form method="POST">
+            <input type="search" name="query">
+        </form>
+    </div>
+    <div class="output">
+        <ol id="search-output">Results</ol>
+        <script>
+            const output = {{ pages_found | safe }};
+            const list = document.getElementById("search-output");
+            for (i = 0; i < output.length; ++i) {
+                const li = document.createElement("li");
+                li.innerHTML = "<a href=" + output[i][1] +">" + output[i][0] + "</a>"
+                list.appendChild(li)
+            }
+        </script>
+    </div>
+    <div class="footer">
+        <a href="/">home</a>
+        <a href="/dashboard">dashboard</a>
+    </div>
+</body>
+</html>
