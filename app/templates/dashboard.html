@@ -13,8 +13,7 @@
 <body>
     <h1>Wikipedia Page Statistics Dashboard</h1>
     <p>
-        I scraped 1000 Wikipedia pages selected at random and calculated a few statistics which can be
-        seen in the interactive visualizations below. The top two plots show the number of sources and number
+        The top two plots show the number of sources and number
         of images for different sized articles by word count. The bottom two plots show the word counts of articles
         at the publish date and at the most recent modification.
     </p>
@@ -49,8 +48,8 @@
     </script>
     <script src="{{ url_for('static', filename='plots.js') }}"></script>
     <div class="footer">
-        <a href="/">home</a>
-        <a href="/search">search</a>
+        <a href="/"><button>home</button></a>
+        <a href="/search"><button>search</button></a>
     </div>
 </body>
 </html>

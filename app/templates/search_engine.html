@@ -14,7 +14,7 @@
         </form>
     </div>
     <div class="output">
-        <ol id="search-output">Results</ol>
+        <ol id="search-output"></ol>
         <script>
             const output = {{ pages_found | safe }};
             const list = document.getElementById("search-output");
@@ -26,8 +26,8 @@
         </script>
     </div>
     <div class="footer">
-        <a href="/">home</a>
-        <a href="/dashboard">dashboard</a>
+        <a href="/"><button>home</button></a>
+        <a href="/dashboard"><button>dashboard</button></a>
     </div>
 </body>
 </html>

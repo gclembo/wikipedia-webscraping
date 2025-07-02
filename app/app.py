@@ -60,5 +60,5 @@ def run_search():
     return render_template("search_engine.html", pages_found=pages_found)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
 
