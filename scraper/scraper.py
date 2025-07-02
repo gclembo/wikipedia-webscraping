@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from pathlib import Path
 
-NUMBER_OF_PAGES = 10
+NUMBER_OF_PAGES = 1000
 
 
 def process_random_page_info():
