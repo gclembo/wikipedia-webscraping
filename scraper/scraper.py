@@ -7,7 +7,11 @@ from pathlib import Path
 NUMBER_OF_PAGES = 1000
 
 
-def process_random_page_info():
+def process_random_page_info() -> tuple[dict[str, str or int], Page]:
+    """
+    Scrapes a random webpage and returns a data entry and page representation of the webpage.
+    :return: Data entry of webpage, and a page representation
+    """
     url = "https://en.wikipedia.org/wiki/Special:Random"
 
     page = requests.get(url)

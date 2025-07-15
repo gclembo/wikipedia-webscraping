@@ -1,7 +1,13 @@
 import collections
 import math
 
-def _get_frequencies(words):
+
+def _get_frequencies(words: list[str]) -> dict[str, int]:
+    """
+    Given a list of words, returns a dictionary of each word mapped to its count in the list.
+    :param words: List of words to count.
+    :return: Dictionary from word to its count.
+    """
     freqs = dict()
     counts = dict(collections.Counter(words))
     n = len(words)
@@ -13,35 +19,61 @@ def _get_frequencies(words):
 
 
 class Page:
-    def __init__(self, title, url, text):
-        self._title = title
-        self._url = url
-        self._words = text.lower().split()
-        self._word_frequencies = _get_frequencies(self._words)
+    """
+    This class represents a webpage and helps with word frequency calculations.
+    """
+    def __init__(self, title: str, url: str, text: str) -> None:
+        """
+        Creates new page with title, url, and text to process.
+        :param title: Title of webpage
+        :param url: Url of webpage
+        :param text: Text from page
+        """
+        self._title: str = title
+        self._url: str = url
+        self._word_frequencies: dict[str: int] = _get_frequencies(text.lower().split())
 
-    def get_frequency(self, word):
+    def get_frequency(self, word) -> int:
+        """
+        Given a word, returns the count of that word in the page.
+        :param word: Word to get count of
+        :return: Word count
+        """
         if word in self._word_frequencies:
             return self._word_frequencies[word.lower()]
         else:
             return 0
 
-    def get_words(self):
-        return self._word_frequencies.keys()
+    def get_words(self) -> set[str]:
+        """
+        :return: Unique words in the page.
+        """
+        return set(self._word_frequencies.keys())
 
-    def get_title(self):
+    def get_title(self) -> str:
+        """
+        :return: Page title
+        """
         return self._title
 
-    def get_url(self):
+    def get_url(self) -> str:
+        """
+        :return: Page url
+        """
         return self._url
 
 
 class SearchEngine:
-    def __init__(self, pages):
+    """
+    Search Engine used for ranking pages based on searches
+    """
+    def __init__(self, pages: list[Page]) -> None:
         """
+        Creates new search engine containing the given pages.
         :param pages: List of pages in the search engine
         """
-        self._pages = pages # list of pages
-        self._inverted_index = dict() # dict from word to documents containing word
+        self._pages: list[Page] = pages # list of pages
+        self._inverted_index: dict[str, list[Page]] = dict() # dict from word to pages containing word
 
         for page in pages:
             words = page.get_words()
@@ -51,7 +83,12 @@ class SearchEngine:
                 else:
                     self._inverted_index[word] = [page]
 
-    def _get_idf(self, word):
+    def _get_idf(self, word: str) -> float:
+        """
+        Given a word, returns the idf score of the word.
+        :param word: Word to get the score of
+        :return: idf score of the word
+        """
         word = word.lower()
         n = len(self._pages)
         word_count = len(self._inverted_index[word])
@@ -61,7 +98,13 @@ class SearchEngine:
         else:
             return math.log(n / word_count)
 
-    def search(self, query):
+    def search(self, query: str) -> list[tuple[str, str]]:
+        """
+        Given a query, returns a list of page titles and urls ordered
+        by most relevant to least relevant to the query.
+        :param query: Search query for pages
+        :return: Pages ordered by most relevant to query
+        """
         page_scores = dict()
         for word in query.lower().split():
             if word in self._inverted_index.keys():

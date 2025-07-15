@@ -10,7 +10,11 @@ project_folder = file_path.resolve().parent.parent
 data_folder = project_folder / "data"
 
 
-def load_data():
+def load_data() -> pd.DataFrame:
+    """
+    Loads data from sqlite file and returns dataframe
+    :return: Dataframe of data
+    """
     db_filename = "wiki_data.db"
     conn = sqlite3.connect(data_folder / db_filename)
     df = pd.read_sql_query("SELECT * FROM pages_raw", conn)
